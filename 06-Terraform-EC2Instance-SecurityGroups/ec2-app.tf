@@ -7,6 +7,8 @@ resource "aws_instance" "app1" {
     Name = "${var.app_instance_name}"
   }
   key_name = aws_key_pair.sshkey.key_name
+  depends_on = [ aws_nat_gateway.ngw,aws_route_table_association.app1 ]
+  user_data = file("${path.module}/httpd.sh")
 }
 
 resource "aws_instance" "app2" {
@@ -18,4 +20,6 @@ resource "aws_instance" "app2" {
     Name = "${var.app_instance_name}"
   }
   key_name = aws_key_pair.sshkey.key_name
+  depends_on = [ aws_nat_gateway.ngw,aws_route_table_association.app2 ]
+  user_data = file("${path.module}/httpd.sh")
 }

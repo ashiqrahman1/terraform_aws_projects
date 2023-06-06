@@ -11,6 +11,13 @@ resource "aws_security_group" "app" {
     security_groups = [aws_security_group.bastion.id]
   }
 
+  ingress {
+    from_port = var.ingress_app_http
+    to_port = var.ingress_app_http
+    protocol = "tcp"
+    security_groups = [aws_security_group.bastion.id]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -18,5 +25,5 @@ resource "aws_security_group" "app" {
     cidr_blocks = var.app_cidr
   }
 
-  #   depends_on = [aws_security_group.bastion]
+  depends_on = [aws_security_group.bastion]
 }

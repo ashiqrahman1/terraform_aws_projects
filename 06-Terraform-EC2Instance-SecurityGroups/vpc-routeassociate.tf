@@ -14,9 +14,11 @@ resource "aws_route_table_association" "public2" {
 resource "aws_route_table_association" "app1" {
   subnet_id      = aws_subnet.app1.id
   route_table_id = aws_route_table.private.id
+  depends_on = [ aws_nat_gateway.ngw ]
 }
 
 resource "aws_route_table_association" "app2" {
   subnet_id      = aws_subnet.app2.id
   route_table_id = aws_route_table.private.id
+  depends_on = [ aws_nat_gateway.ngw ]
 }

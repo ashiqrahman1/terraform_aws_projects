@@ -23,6 +23,11 @@ variable "ingress_app" {
   default = 22
 }
 
+variable "ingress_app_http" {
+  type    = number
+  default = 80
+}
+
 variable "app_cidr" {
   type    = list(string)
   default = ["0.0.0.0/0"]
